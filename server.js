@@ -1,11 +1,9 @@
 var express = require('express');
-var logger = require('morgan');
+var exphbs = require("express-handlebars");
+var cheerio = require('cheerio');
 var mongoose = require('mongoose');
 var axios = require('axios');
-var cheerio = require('cheerio');
-var exphbs = require("express-handlebars");
-
-
+var logger = require('morgan');
 var app = express();
 var PORT = 3002;
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -15,7 +13,6 @@ mongoose.connect(MONGODB_URI);
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Make public a static folder
 app.use(express.static("public"));
 
 app.engine(
@@ -26,7 +23,7 @@ app.engine(
   );
   app.set("view engine", "handlebars");
   
-
+ 
 require("./routes/api-routes.js")(app);
 
 
