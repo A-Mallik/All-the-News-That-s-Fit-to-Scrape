@@ -19,40 +19,43 @@ module.exports = (app) => {
           //        console.log("body: " + $(element).text());  // gets the P tag element which contains the summary
           //        result.body = $(element).text();
           //       });
-          $("li.ekkqrpp3").each(function(i, element) {   //runs Cheerio on the data and retuns the elements as each
+          $("div.css-13mho3u ol h2").each(function(i, element) {   //runs Cheerio on the data and retuns the elements as each
+          // $("ol").each(function(i, element) {   //runs Cheerio on the data and retuns the elements as each
                 //  console.log("body: " + $(element).text());  // gets the P tag element which contains the summary
                 //  result.body = $(element).text();
-                result.title = $(element).find("h2").text();
-                // result.link = $(element).find("h2").text();
-                result.body = $(element).find("p.e4e4i5l4").text();
+                // result.title = $(element).find("h2").text();
+                // // result.link = $(element).find("h2").text();
+                // result.body = $(element).find("p.e4e4i5l4").text();
                 
-
+                console.log($(this).text());
           //       $("article h2").each(function(i, elements) {  
-              
-                 
+          //   result.title = $(element).find("h2.css-1dq8tca").text();
+          //  result.body = $(element).find("p.css-1echdzn").text();     
             
             
-          //         result.title = $(this)
-          //           .children("a")
-          //           .text();
-          //         result.link = $(this)
-          //           .children("a")
-          //           .attr("href");
+          // //         result.title = $(this)
+          // //           .children("a")
+          // //           .text();
+          // //         result.link = $(this)
+          // //           .children("a")
+          // //           .attr("href");
                     
-                  
-                  db.Article.create(result)
-                    .then(function(dbArticle) {
+          //         // ----------------------------------
+          //         db.Article.create(result)
+          //           .then(function(dbArticle) {
       
-                    })
-                    .catch(function(err) {
+          //           })
+          //           .catch(function(err) {
         
-                      console.log(err);
-                    });
+          //             console.log(err);
+          //           });
+                  // ----------------------------------
                   
           // });
  
           res.send("Scrape Complete");
         });
+      // });
       });
       });
 
