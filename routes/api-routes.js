@@ -15,21 +15,30 @@ module.exports = (app) => {
           var $ = cheerio.load(response.data);
           console.log($("p"))
          
-          $("p.e4e4i5l4").each(function(i, element) {   //runs Cheerio on the data and retuns the elements as each
-                 console.log("body: " + $(element).text());  // gets the P tag element which contains the summary
-          
-                $("article h2").each(function(i, elements) {  
+          // $("p.e4e4i5l4").each(function(i, element) {   //runs Cheerio on the data and retuns the elements as each
+          //        console.log("body: " + $(element).text());  // gets the P tag element which contains the summary
+          //        result.body = $(element).text();
+          //       });
+          $("li.ekkqrpp3").each(function(i, element) {   //runs Cheerio on the data and retuns the elements as each
+                //  console.log("body: " + $(element).text());  // gets the P tag element which contains the summary
+                //  result.body = $(element).text();
+                result.title = $(element).find("h2").text();
+                // result.link = $(element).find("h2").text();
+                result.body = $(element).find("p.e4e4i5l4").text();
+                
+
+          //       $("article h2").each(function(i, elements) {  
               
                  
             
             
-                  result.title = $(this)
-                    .children("a")
-                    .text();
-                  result.link = $(this)
-                    .children("a")
-                    .attr("href");
-                    result.body = $(element++).text();
+          //         result.title = $(this)
+          //           .children("a")
+          //           .text();
+          //         result.link = $(this)
+          //           .children("a")
+          //           .attr("href");
+                    
                   
                   db.Article.create(result)
                     .then(function(dbArticle) {
@@ -39,11 +48,12 @@ module.exports = (app) => {
         
                       console.log(err);
                     });
-                  });
-          });
+                  
+          // });
  
           res.send("Scrape Complete");
         });
+      });
       });
 
       app.get("/articles", function(req, res) {

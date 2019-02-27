@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var axios = require('axios');
 var logger = require('morgan');
 var app = express();
-var PORT = 3002;
+var PORT = 3000;
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 var db = require("./models");
 mongoose.connect(MONGODB_URI);
