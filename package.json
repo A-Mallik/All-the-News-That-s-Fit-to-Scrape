@@ -22,6 +22,7 @@
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
     "mongoose": "^5.4.14",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "prettier": "^1.16.4"
   }
 }

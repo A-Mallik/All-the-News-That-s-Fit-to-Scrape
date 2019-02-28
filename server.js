@@ -26,6 +26,11 @@ app.engine(
  
 require("./routes/api-routes.js")(app);
 
+app.get("/api/comment", function(req, res){
+  db.Comment.create(req.body).then(function(dbComment) {
+    res.json(dbComment);
+  });
+});
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
