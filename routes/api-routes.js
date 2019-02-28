@@ -36,6 +36,21 @@ module.exports = app => {
     });
   });
 
+  app.get("/comments", function(req, res) {
+    // Find all Notes
+    db.Comment.find({})
+      .then(function(dbComment) {
+        // If all Notes are successfully found, send them back to the client
+        res.json(dbComment);
+      }).then(function(dbComment){
+        window.location.href="/";
+      })
+      .catch(function(err) {
+        // If an error occurs, send the error back to the client
+        res.json(err);
+      });
+  });
+
   app.get("/articles", function(req, res) {
     db.Article.find({})
       .then(function(dbArticle) {
@@ -46,13 +61,40 @@ module.exports = app => {
       });
   });
 
-  app.post("/submit", function(req, res) {
-    db.Comment.create(req.body).then(function(dbComment) {
-      return db.Article.findOneAndUpdate(
-        {},
-        { $push: { notes: dbComment._id } },
-        { new: true }
-      );
+//---------------------------------------
+
+
+app.post("/submit", function(req, res) {
+  db.Comment.create(req.body)
+    .then(function(dbComment) {
+      return db.Article.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
+    })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
     });
-  });
+});
+
+
+app.get("/populatedArticles", function(req, res) {
+  // Find all articles
+  db.Article.find({})
+    // Specify the retrieved articles with any associated coments
+    .populate("comment")
+    .then(function(dbArticle) {
+      // send them back once found
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
+
+
+
+  // ------------------------------------
 };

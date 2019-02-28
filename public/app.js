@@ -1,12 +1,16 @@
-
-
-
+function SubForm (){
+  $.ajax({
+      url:'/submit',
+      type:'post',
+      data:$('#myForm').serialize(),
+      success:function(){
+          alert("worked");
+      }
+  });
+}
      
-     function myFunction(data){
-      // $.post("/api/comment", data, function() {
-
-      // });
-      alert(data);
+     function myFunction(){
+       document.getElementById("myForm").submit();
       }
       
       $.ajax({
@@ -22,26 +26,18 @@
             var titleCard = $(
                 "<div>"
               );
-              var commentSpace = $(
-                "<br/><input class='commentSpace'>"
-              );
               titleCard.addClass("card");
-             var val = "hello";
-              commentSpace.addClass("comment");
               var newPostTitle = $("<h3>");
               var newPostBody = $("<h4>");
               var commentButton = $(
-               "<form action='/submit' method='post' id='myForm' ><input type='button' data=" + data[i]._id + "  onclick='myFunction(" + val + ")' value='Submit form'></form>" 
+                '<br><form action="/submit" id="myForm" method="post"><textarea type="text" name="body" placeholder="Write Comment Here"></textarea><br><input class="inputStyle" value="Submit Comment" data="' + data[i]._id +'" type="submit"></form><hr>'
               );
               newPostTitle.html('<a href="https://www.nytimes.com' + data[i].link + '">' + data[i].title + '</a> ' );
               newPostBody.html('<br/>' + data[i].body);
-              // commentButton.text("Comment");
               commentButton.addClass(" ");
               titleCard.append(newPostTitle);
               titleCard.append(newPostBody);
-              titleCard.append(commentSpace);
               titleCard.append(commentButton);
-              commentSpace.addClass("comment");
               result.push(titleCard);
               
          }
