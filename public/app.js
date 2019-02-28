@@ -27,6 +27,8 @@ function SubForm (){
                 "<div>"
               );
               titleCard.addClass("card");
+              var newButton = $("<button class='getCommentsBtn' value='Get Comments' data='" + data[i]._id +
+              "' data-toggle='modal' data-target='#exampleModalCenter'>Get Comments</button>");
               var newPostTitle = $("<h3>");
               var newPostBody = $("<h4>");
               var commentButton = $(
@@ -34,14 +36,55 @@ function SubForm (){
               );
               newPostTitle.html('<a href="https://www.nytimes.com' + data[i].link + '">' + data[i].title + '</a> ' );
               newPostBody.html('<br/>' + data[i].body);
-              commentButton.addClass(" ");
+              newButton.addClass("getCommentsBtn");
+
               titleCard.append(newPostTitle);
+            
               titleCard.append(newPostBody);
+              titleCard.append(newButton);
               titleCard.append(commentButton);
-              result.push(titleCard);
               
+              result.push(titleCard);
+                  
+             
+                
          }
          for(var i = 0; i < result.length; i++){
             document.querySelector("#articles").append(result[i][0]);
          }
+         $(".getCommentsBtn").on('click',function(){
+                  // alert($(this).attr('data'));
+                  data2 = $(this).attr('data');
+                  $.ajax({
+                    method: "GET",
+                    url: "/populatedArticles/" 
+                  })
+                    .then(function(data) {
+
+                      for(var i = 0; i < data.length; i++){
+                            // if(data[i]._id === data)
+                            if( data2 === data[i]._id){
+
+
+                              for(var j = 0; j < data[i].comment.length; j++){
+                                if(data[i].comment[j].body)
+                                {
+                                  $(".modal-body").append("<br>" + data[i].comment[j].body);
+                                }
+                              }
+                              // $(".modal-body").text(data[i].comment[0]);
+                            }
+                            // console.log(data2)
+                      }
+            
+                        
+                        
+                   
+                    });
+
+
+     })
+
+     
+     
         });

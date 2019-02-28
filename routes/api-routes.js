@@ -37,16 +37,11 @@ module.exports = app => {
   });
 
   app.get("/comments", function(req, res) {
-    // Find all Notes
     db.Comment.find({})
       .then(function(dbComment) {
-        // If all Notes are successfully found, send them back to the client
         res.json(dbComment);
-      }).then(function(dbComment){
-        window.location.href="/";
       })
       .catch(function(err) {
-        // If an error occurs, send the error back to the client
         res.json(err);
       });
   });
