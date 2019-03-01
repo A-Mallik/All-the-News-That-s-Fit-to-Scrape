@@ -47,6 +47,16 @@ module.exports = app => {
       });
   });
 
+  app.get("/comments_delete/:id", function(req, res) {
+    db.Comment.deleteOne({_id : req.params.id})
+    .then(function() {
+      res.redirect("/");  //redirect on form action back to main page
+    })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
+
   app.get("/articles", function(req, res) {
     db.Article.find({})
       .then(function(dbArticle) {
@@ -76,6 +86,22 @@ app.post("/submit/:id", function(req, res) {  //submit by grabbing specific arti
 app.get("/populatedArticles/:id", function(req, res) {
   // Find all articles
   db.Article.find({_id: req.params.id})
+    // Specify the retrieved articles with any associated coments
+    .populate("comment")
+    .then(function(dbArticle) {
+      console.log(dbArticle);
+      // send them back once found
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
+app.get("/populatedArticles/", function(req, res) {
+  // Find all articles
+  db.Article.find({})
     // Specify the retrieved articles with any associated coments
     .populate("comment")
     .then(function(dbArticle) {

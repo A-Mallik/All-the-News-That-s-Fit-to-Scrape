@@ -22,7 +22,7 @@ function SubForm (){
         var divEl = document.createElement("div");
           
          for(var i = 0; i < data.length; i++){
-           console.log(data[i]._id);
+          //  console.log(data[i]);
             var titleCard = $(
                 "<div>"
               );
@@ -66,9 +66,12 @@ function SubForm (){
                               // for(var j = 0; j < data[i].comment.length; j++){
                               //   if(data[i].comment[j].body && data2 === data[i]._id)
                               //   {
-                                  console.log(data[0].comment.body);
-                                  data[0].comment.forEach(comment => {
-                                    $(".modal-body").append("<br>" + comment.body);
+                                  // console.log(data[0].comment[0]._id);
+                                  // console.log(data[0]);
+                                  data[0].comment.forEach((comment,i) => {  //iterate with i to get each id, not needed if just else for looping
+                                    $(".modal-body").append(`<div class='modalCommentSpace' <br> ${comment.body}<button onclick="location.href = '/comments_delete/${data[0].comment[i]._id}'" style='float:right'; class=deleteBtn>x</button></div><hr>`);
+                                    
+                                    // console.log(data[0].comment[i]._id); //get each id
                                   })
                                  
                                 // }
