@@ -29,10 +29,11 @@ module.exports = app => {
             console.log(err);
           });
         // ----------------------------------
-        // });
         // res.send("Scrape Complete");
       });
       // });
+    }).then(function() {
+      res.redirect("/");  //redirect on form action back to main page
     });
   });
 
@@ -58,14 +59,13 @@ module.exports = app => {
 
 //---------------------------------------
 
-
-app.post("/submit/:id", function(req, res) {
+app.post("/submit/:id", function(req, res) {  //submit by grabbing specific article ID (which was assigned as data to the submit button)
   db.Comment.create(req.body)
     .then(function(dbComment) {
-      return db.Article.findOneAndUpdate({_id: req.params.id }, { $push: { comment: dbComment._id } }, { new: true });
+      return db.Article.findOneAndUpdate({_id: req.params.id }, { $push: { comment: dbComment._id } }, { new: true });  //pass the id through to _id using req.params
     })
     .then(function(dbArticle) {
-      res.redirect("/");
+      res.redirect("/");  //redirect on form action back to main page
     })
     .catch(function(err) {
       res.json(err);

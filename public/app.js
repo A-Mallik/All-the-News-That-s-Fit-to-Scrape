@@ -37,13 +37,10 @@ function SubForm (){
               newPostTitle.html('<a href="https://www.nytimes.com' + data[i].link + '">' + data[i].title + '</a> ' );
               newPostBody.html('<br/>' + data[i].body);
               newButton.addClass("getCommentsBtn");
-
               titleCard.append(newPostTitle);
-            
               titleCard.append(newPostBody);
               titleCard.append(newButton);
               titleCard.append(commentButton);
-              
               result.push(titleCard);
                   
              
@@ -65,12 +62,12 @@ function SubForm (){
                             // if(data[i]._id === data)
                             // if( data2 === data[i]._id){
 
-                              // $(".modal-body").empty();
+                               $(".modal-body").empty();
                               // for(var j = 0; j < data[i].comment.length; j++){
                               //   if(data[i].comment[j].body && data2 === data[i]._id)
                               //   {
-                                  console.log(data[0].comment);
-                                  data[0].comments.forEach(comment => {
+                                  console.log(data[0].comment.body);
+                                  data[0].comment.forEach(comment => {
                                     $(".modal-body").append("<br>" + comment.body);
                                   })
                                  
