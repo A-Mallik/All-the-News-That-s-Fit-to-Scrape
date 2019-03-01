@@ -59,10 +59,10 @@ module.exports = app => {
 //---------------------------------------
 
 
-app.post("/submit", function(req, res) {
+app.post("/submit/:id", function(req, res) {
   db.Comment.create(req.body)
     .then(function(dbComment) {
-      return db.Article.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
+      return db.Article.findOneAndUpdate({_id: req.params.id }, { $push: { comment: dbComment._id } }, { new: true });
     })
     .then(function(dbArticle) {
       res.json(dbArticle);
@@ -73,9 +73,9 @@ app.post("/submit", function(req, res) {
 });
 
 
-app.get("/populatedArticles", function(req, res) {
+app.get("/populatedArticles/:id", function(req, res) {
   // Find all articles
-  db.Article.find({})
+  db.Article.find({_id: req.params.id})
     // Specify the retrieved articles with any associated coments
     .populate("comment")
     .then(function(dbArticle) {

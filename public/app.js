@@ -32,7 +32,7 @@ function SubForm (){
               var newPostTitle = $("<h3>");
               var newPostBody = $("<h4>");
               var commentButton = $(
-                '<br><form action="/submit" id="myForm" method="post"><textarea type="text" name="body" placeholder="Write Comment Here"></textarea><br><input class="inputStyle" value="Submit Comment" data="' + data[i]._id +'" type="submit"></form><hr>'
+                `<br><form action="/submit/${data[i]._id}" id="myForm" method="post"><textarea type="text" name="body" placeholder="Write Comment Here"></textarea><br><input class="inputStyle" value="Submit Comment" data="${data[i]._id}" type="submit"></form><hr>`
               );
               newPostTitle.html('<a href="https://www.nytimes.com' + data[i].link + '">' + data[i].title + '</a> ' );
               newPostBody.html('<br/>' + data[i].body);
@@ -54,10 +54,10 @@ function SubForm (){
          }
          $(".getCommentsBtn").on('click',function(){
                   // alert($(this).attr('data'));
-                  data2 = $(this).attr('data');
+                 var data2 = $(this).attr('data');
                   $.ajax({
                     method: "GET",
-                    url: "/populatedArticles/" 
+                    url: `/populatedArticles/${data2}`
                   })
                     .then(function(data) {
 
@@ -67,9 +67,12 @@ function SubForm (){
 
 
                               for(var j = 0; j < data[i].comment.length; j++){
-                                if(data[i].comment[j].body)
+                                if(data[i].comment[j].body && data2 === data[i]._id)
                                 {
                                   $(".modal-body").append("<br>" + data[i].comment[j].body);
+                                }
+                                else{
+                                  $(".modal-body").empty();
                                 }
                               }
                               // $(".modal-body").text(data[i].comment[0]);
