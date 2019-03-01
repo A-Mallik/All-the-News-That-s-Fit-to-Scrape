@@ -65,7 +65,7 @@ app.post("/submit/:id", function(req, res) {
       return db.Article.findOneAndUpdate({_id: req.params.id }, { $push: { comment: dbComment._id } }, { new: true });
     })
     .then(function(dbArticle) {
-      res.json(dbArticle);
+      res.redirect("/");
     })
     .catch(function(err) {
       res.json(err);
@@ -79,6 +79,7 @@ app.get("/populatedArticles/:id", function(req, res) {
     // Specify the retrieved articles with any associated coments
     .populate("comment")
     .then(function(dbArticle) {
+      console.log(dbArticle);
       // send them back once found
       res.json(dbArticle);
     })

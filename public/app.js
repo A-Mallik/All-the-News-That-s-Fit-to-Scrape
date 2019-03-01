@@ -61,24 +61,28 @@ function SubForm (){
                   })
                     .then(function(data) {
 
-                      for(var i = 0; i < data.length; i++){
+                      // for(var i = 0; i < data.length; i++){
                             // if(data[i]._id === data)
-                            if( data2 === data[i]._id){
+                            // if( data2 === data[i]._id){
 
-
-                              for(var j = 0; j < data[i].comment.length; j++){
-                                if(data[i].comment[j].body && data2 === data[i]._id)
-                                {
-                                  $(".modal-body").append("<br>" + data[i].comment[j].body);
-                                }
-                                else{
-                                  $(".modal-body").empty();
-                                }
-                              }
+                              // $(".modal-body").empty();
+                              // for(var j = 0; j < data[i].comment.length; j++){
+                              //   if(data[i].comment[j].body && data2 === data[i]._id)
+                              //   {
+                                  console.log(data[0].comment);
+                                  data[0].comments.forEach(comment => {
+                                    $(".modal-body").append("<br>" + comment.body);
+                                  })
+                                 
+                                // }
+                                // else{
+                                //   $(".modal-body").empty();
+                                // }
+                              // }
                               // $(".modal-body").text(data[i].comment[0]);
-                            }
+                            
                             // console.log(data2)
-                      }
+                      // }
             
                         
                         
