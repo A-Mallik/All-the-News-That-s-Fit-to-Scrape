@@ -47,10 +47,10 @@ module.exports = app => {
       });
   });
 
-  app.get("/comments_delete/:id", function(req, res) {
-    db.Comment.deleteOne({_id : req.params.id})
+  app.get("/comments_delete/:id", function(req, res) {  //find specific comment by passing id through to url from front end
+    db.Comment.deleteOne({_id : req.params.id})  // find comment model then use deleteOne mongoDb function to find and delete the passed id
     .then(function() {
-      res.redirect("/");  //redirect on form action back to main page
+      res.redirect("/");  //redirect on form action back to main page after delete completed
     })
       .catch(function(err) {
         res.json(err);
