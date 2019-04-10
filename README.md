@@ -1,7 +1,7 @@
 # All-the-News-That-s-Fit-to-Scrape
 
 
-<img src="https://github.com/A-Mallik/All-the-News-That-s-Fit-to-Scrape/blob/master/NyTimesScraper.png?raw=true" width="250" height="230" alt="NYScraper">
+<img src="https://github.com/A-Mallik/All-the-News-That-s-Fit-to-Scrape/blob/master/NyTimesScraper.png?raw=true" width="550" height="330" alt="NYScraper">
 
 A web app that lets users view and leave comments on the latest news, using  Mongoose and Cheerio to scrape news from another site.
 
